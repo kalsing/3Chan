@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "express": "^5.2.1",
-    "sequelize": "^6.37.7"
+    "sequelize": "^6.37.7",
+    "sqlite3": "^5.1.7"
   },
   "name": "apibackendjs",
   "version": "1.0.0",
