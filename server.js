@@ -12,11 +12,12 @@ app.post('/users', (req, res) => {
 })
 
 app.get('/users', (req, res) => {
-    res.json(users)
-    res.send('GET Concluido')
-
+res.json(users)
+res.send('GET Concluido')
 })
 
 
-
 app.listen(3000);
+
+
+
