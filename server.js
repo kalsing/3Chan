@@ -3,15 +3,18 @@ const express = require('express')
 
 const app = express()
 app.use(express.json())
+users = []
 
 
 app.post('/users', (req, res) => {
-    console.log(req.body)
+    users.push(req.body)
     res.send('POST Concluido')
 })
 
 app.get('/users', (req, res) => {
+    res.json(users)
     res.send('GET Concluido')
+
 })
 
 
