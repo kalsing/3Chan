@@ -5,7 +5,7 @@ const app = express()
 app.use(express.json())
 
 
-app.post('/usuarios', (req, res) => {
+app.post('/users', (req, res) => {
     console.log(req.body)
     res.send('POST Concluido')
 })
