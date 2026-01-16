@@ -17,7 +17,13 @@ res.send('GET Concluido')
 })
 
 
+
 app.listen(3000);
 
+
+
+// Port: 5432
+//Password: Gabik0803
+//
 
 
