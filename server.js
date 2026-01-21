@@ -2,6 +2,7 @@ import express from "express";
 import sequelize from "./database.js";
 import User from "./User.js";
 import Post from "./Post.js";
+import { mapWhereFieldNames } from "sequelize/lib/utils";
 
 User.hasMany(Post);
 Post.belongsTo(User);
@@ -30,6 +31,10 @@ app.get("/users", async (req, res) => {
   }
 })
 
+
+
+
+
 app.post("/posts", async (req, res) => {
   try {
     const post = await Post.create({
@@ -56,6 +61,24 @@ app.get("/posts", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+
+
+app.put("/posts/:id", async (req, res) => {
+  const [updated] = await Post.update(
+    req.body,
+    { where: { id: req.params.id } }
+  );
+
+  if (!updated) {
+    return res.status(404).json({ error: "Post não encontrado" });
+  }
+
+  res.json(await Post.findByPk(req.params.id));
+});
+
+
+
 
 
 async function startServer() {
