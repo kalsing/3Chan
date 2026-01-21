@@ -1,4 +1,4 @@
-import sequelize from "./database.js";
+import sequelize from "../database.js";
 import { DataTypes } from "sequelize";
 
 
@@ -13,6 +13,6 @@ const User = sequelize.define("User", {
   },
 });
 
-console.log(User === sequelize.models.User); // true
+console.log(User === sequelize.models.User); 
 
 export default User;
