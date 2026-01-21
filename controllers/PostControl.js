@@ -19,9 +19,9 @@ class PostControl {
   }
 
   async update(req, res) {
-    const [updated] = await Post.update(
+    const updated = await Post.update(
       req.body,
-      { where: { id: req.params.id } }
+      {where: {id: req.params.id}}
     );
 
     return res.json(await Post.findByPk(req.params.id));
@@ -31,9 +31,7 @@ class PostControl {
     const deleted = await Post.destroy({
       where: { id: req.params.id }
     });
-
-
-    return res.status(204).send();
+    return res.status(200).send();
   }
 }
 

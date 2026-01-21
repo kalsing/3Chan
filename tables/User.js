@@ -13,6 +13,4 @@ const User = sequelize.define("User", {
   },
 });
 
-console.log(User === sequelize.models.User); 
-
 export default User;
