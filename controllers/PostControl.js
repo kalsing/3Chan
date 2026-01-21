@@ -24,10 +24,6 @@ class PostControl {
       { where: { id: req.params.id } }
     );
 
-    if (!updated) {
-      return res.status(404).json({ error: "Post não encontrado" });
-    }
-
     return res.json(await Post.findByPk(req.params.id));
   }
 
@@ -36,9 +32,6 @@ class PostControl {
       where: { id: req.params.id }
     });
 
-    if (!deleted) {
-      return res.status(404).json({ error: "Post não encontrado" });
-    }
 
     return res.status(204).send();
   }
