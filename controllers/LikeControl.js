@@ -21,7 +21,7 @@ class LikeControl {
 
     const unlike = await Like.destroy({
         where: { 
-          userId: userId,
+          UserId: userId,
           PostId: postId
         }
     });

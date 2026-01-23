@@ -1,19 +1,21 @@
 import User from "../tables/User.js";
 import Post from "../tables/Post.js";
+import Like from "../tables/Like.js";
 
 class PostControl {
 
   async create(req, res) {
     const post = await Post.create({
       title: req.body.title,
-      userId: req.body.userId
+      UserId: req.body.userId
     });
     return res.json(post);
   }
 
   async showAll(req, res) {
     const posts = await Post.findAll({
-      include: User
+      include: User,
+      include: Like
     });
     return res.json(posts);
   }
