@@ -4,11 +4,12 @@ import sequelize from "../database.js";
 const Post = sequelize.define("Post", {
   title: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
   },
   UserId: {
     type: DataTypes.INTEGER,
-    allowNull: false
+    allowNull: false,
+    unique: true
   }
 });
 
