@@ -20,5 +20,6 @@ router.put("/users/:id", (req, res) => userController.updateUser(req, res));
 router.delete("/users/:id", (req, res) => userController.destroyUser(req, res));
 
 router.post("/likes", (req, res) => likeController.like(req, res));
+router.get("/posts/:postId/likes", (req, res) => likeController.likeCounter(req, res));
 
 export default router;

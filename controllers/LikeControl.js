@@ -8,20 +8,24 @@ class LikeControl {
     const userId = req.body.userId;
     const postId = req.body.postId;
 
-    const like = await Like.create({
+    const addLike = await Like.create({
         UserId: userId,
         PostId: postId
     });
-    return res.json(like);
+    return res.json(addLike);
   }
 
-  async countLikes(req, res) {
-    const totalLikes = Like.count(
-    where: {
-      PostId, PostId
-    })
-    return res.json ({ totalLikes });
-  };
+  async likeCounter(req, res){
+    const postId = req.params.postId;
+
+    const countLikes = await Like.count({
+      where: {
+      PostId: postId
+      }
+
+    });
+    return res.json(countLikes);
+  }
   
   async unlike(req, res) {
         const userId = req.body.userId;
