@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import api from "../../apis/api"
-import { Button, TextField, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 
 function HomePage() {
   const [userData, setUserData] = useState([]);
@@ -38,33 +38,51 @@ function HomePage() {
     console.log(postData)
   }, [postData])
 
-  return (
+return (
+  <Box
+    sx={{
+    backgroundColor: 'grey',
+    minHeight: '100vh',     
+    display: 'flex',
+    ustifyContent: 'center',
+    alignItems: 'center',
+    padding: 2
+}}
+  >
+    <Box
+      sx={{
+      backgroundColor: "darkgray",
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 2,
+      padding: 4
+  }}
+    >
+<TextField
+  id="outlined-basic"
+  variant="outlined"
+  label="Nome"
+  value={nome}
+  onChange={(e) => setNome(e.target.value)}
+      />
+
+<TextField
+  id="outlined-basic-2"
+  variant="outlined"
+  label="Sobrenome"
+  value={sobrenome}
+  onChange={(e) => setSobrenome(e.target.value)}
+      />
 
 
-<div className="CreateUser">
-  <TextField
-    id="outlined-basic"
-    variant="outlined"
-    label="Nome"
-    value={nome}
-    onChange={(e) => setNome(e.target.value)}> 
-  </TextField>
+<Button variant="outlined">
+    Criar Usuario
+  </Button>
+    </Box>
+    </Box>
+)
+}
 
-  <TextField
-    id="outlined-basic"
-    variant="outlined"
-    label="Sobrenome"
-    value={sobrenome}
-    onChange={(e) => setSobrenome(e.target.value)}> 
-  </TextField>
-    <Button
-    variant="outlined">
-      Criar Usuario
-    </Button>
-    </div>
-
-    
-  )}
 
 
 
