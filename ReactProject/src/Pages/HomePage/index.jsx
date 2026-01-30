@@ -47,6 +47,7 @@ return (
     ustifyContent: 'center',
     alignItems: 'center',
     padding: 2
+    //-- lembrar de criar um global CSS para melhor organizacao
 }}
   >
     <Box
@@ -79,6 +80,19 @@ return (
     Criar Usuario
   </Button>
     </Box>
+
+<Box sx={{ 
+    backgroundColor: "#1e1e1e",
+    padding: 3,
+    borderRadius: 2,
+    maxWidth: 600 }}>
+
+  <Typography
+   variant="h5"
+   color="white"
+   gutterBottom> Posts </Typography>
+
+</Box>
     </Box>
 )
 }
