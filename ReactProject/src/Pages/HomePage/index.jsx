@@ -86,12 +86,35 @@ return (
     backgroundColor: "#1e1e1e",
     padding: 3,
     borderRadius: 2,
-    maxWidth: 600 }}>
+    maxWidth: 600,}}>
 
   <Typography
    variant="h5"
    color="white"
-   gutterBottom> Posts </Typography>
+   > Posts </Typography>
+
+   {postData.map((post) => (
+<Box
+    key={post.id}
+    sx={{
+    bgcolor: "#2a2a2a",
+    padding: 2,
+    mb: 2
+    }}
+  >
+<Typography color="green">
+  {post.title}
+</Typography>
+
+<Typography 
+  color="red" 
+  sx={{ mt: 1 }}>
+  {post.Likes.length} Curtidas
+</Typography>
+
+  </Box>
+   ))}
+
 
 </Box>
     </Box>
