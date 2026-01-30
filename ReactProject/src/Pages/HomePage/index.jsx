@@ -56,7 +56,8 @@ return (
       display: 'flex',
       flexDirection: 'column',
       gap: 2,
-      padding: 4
+      padding: 4,
+      borderRadius: 2
   }}
     >
 <TextField
