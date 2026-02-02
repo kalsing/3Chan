@@ -20,7 +20,7 @@ function HomePage() {
   async function createPost(){
     await api.post("/posts", {
     title: titulo,
-    userId: id
+    UserId: id
     })
   }
 
