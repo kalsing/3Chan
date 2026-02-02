@@ -78,7 +78,9 @@ function HomePage() {
         />
 
 
-        <Button variant="outlined">
+        <Button variant="outlined"
+
+        >
           Criar Usuario
         </Button>
       </Box>
@@ -87,8 +89,6 @@ function HomePage() {
         backgroundColor: "#1e1e1e",
         padding: 3,
         borderRadius: 2,
-        display: "flex",
-
         maxWidth: 600,
       }}>
 
@@ -103,7 +103,7 @@ function HomePage() {
             sx={{
               bgcolor: "#2a2a2a",
               padding: 2,
-              mb: 2,
+              mb: 2
             }}
           >
             <Typography color="green">
