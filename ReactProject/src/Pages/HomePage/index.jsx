@@ -51,13 +51,13 @@ function HomePage() {
   return (
     <Box
       sx={{
-        backgroundColor: 'grey',
+        backgroundColor: '#f0f2f5',
         minHeight: '100vh',
         display: 'flex',
-        ustifyContent: 'center',
+        flexDirection: 'column',
         alignItems: 'center',
-        padding: 2
-        //-- lembrar de criar um global CSS para melhor organizacao
+        padding: 4,
+        gap: 4
       }}
     >
       <Box
