@@ -7,11 +7,20 @@ function HomePage() {
   const [postData, setPostData] = useState([]);
   const [nome, setNome] = useState("")
   const [sobrenome, setSobrenome] = useState("")
+  const [titulo, setTitulo] = useState("")
+  const [id, setId] = useState("")
 
-  async function postUser() {
+  async function createUser() {
     await api.post("/users", {
       firstName: nome,
       lastName: sobrenome
+    })
+  }
+
+  async function createPost(){
+    await api.post("/posts", {
+    title: titulo,
+    userId: id
     })
   }
 
@@ -77,13 +86,45 @@ function HomePage() {
           onChange={(e) => setSobrenome(e.target.value)}
         />
 
-
-        <Button variant="outlined"
-
-        >
-          Criar Usuario
-        </Button>
       </Box>
+
+      
+      <Box sx={{
+        backgroundColor: "white",
+        padding: 3,
+        borderRadius: 2,
+        maxWidth: 600,
+      }}>
+
+
+        <TextField>
+          id="outlined-basic"
+          variant="outlined"
+          label="Titulo do Post"
+          value={titulo}
+          onChange={(e) => setTitulo(e.target.value)}
+        </TextField>
+
+             <TextField>
+          id="outlined-basic"
+          variant="outlined"
+          label="Id do Usuario"
+          value={id}
+          onChange={(e) => setId(e.target.value)}
+        </TextField>
+
+        <Button
+        onClick={createPost}
+        >
+          Enviar Post
+
+        </Button>
+
+
+        
+  
+      </Box>
+
 
       <Box sx={{
         backgroundColor: "#1e1e1e",

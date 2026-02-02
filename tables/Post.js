@@ -6,7 +6,7 @@ const Post = sequelize.define("Post", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  UserId: {
+  userId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     unique: true
