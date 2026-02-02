@@ -9,7 +9,6 @@ const Post = sequelize.define("Post", {
   UserId: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    unique: true
   }
 });
 
