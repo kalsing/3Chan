@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import api from "../../apis/api"
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography, Paper } from "@mui/material";
 
 function HomePage() {
   const [userData, setUserData] = useState([]);
@@ -11,24 +11,17 @@ function HomePage() {
   const [id, setId] = useState("")
 
   async function createUser() {
-    await api.post("/users", {
-      firstName: nome,
-      lastName: sobrenome
-    })
+    await api.post("/users", { firstName: nome, lastName: sobrenome })
   }
 
-  async function createPost(){
-    await api.post("/posts", {
-    title: titulo,
-    UserId: id
-    })
+  async function createPost() {
+    await api.post("/posts", { title: titulo, UserId: id })
   }
 
   async function getUserData() {
     const getUserResponse = await api.get("/users");
     setUserData(getUserResponse.data);
   }
-
 
   async function getPostData() {
     const getPostResponse = await api.get("/posts");
@@ -40,133 +33,121 @@ function HomePage() {
     getUserData();
   }, [])
 
-  useEffect(() => {
-    console.log(userData)
-  }, [userData])
-
-  useEffect(() => {
-    console.log(postData)
-  }, [postData])
-
   return (
-    <Box
-      sx={{
-        backgroundColor: '#f0f2f5',
-        minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        padding: 4,
-        gap: 4
-      }}
-    >
-      <Box
+    <Box sx={{
+      backgroundColor: '#f0f2f5',
+      minHeight: '100vh', p: 4,
+      display: 'flex', flexDirection: 'column',
+      alignItems: 'center',
+      gap: 4
+    }}>
+
+      <Paper elevation={2}
         sx={{
-          backgroundColor: "darkgray",
+          p: 3,
+          width: '100%',
+          maxWidth: 400,
           display: 'flex',
           flexDirection: 'column',
-          gap: 2,
-          padding: 4,
-          borderRadius: 2
-        }}
-      >
+          gap: 2
+        }}>
+        <Typography variant="h6" fontWeight="bold">Login</Typography>
         <TextField
-          id="outlined-basic"
-          variant="outlined"
           label="Nome"
+          variant="outlined"
+          fullWidth
           value={nome}
           onChange={(e) => setNome(e.target.value)}
         />
-
         <TextField
-          id="outlined-basic-2"
-          variant="outlined"
           label="Sobrenome"
+          variant="outlined"
+          fullWidth
           value={sobrenome}
           onChange={(e) => setSobrenome(e.target.value)}
         />
+        <Button variant="contained" onClick={createUser}>Criar Usuario</Button>
+      </Paper>
 
-      </Box>
+      <Paper elevation={2}
+        sx={{
+          p: 3,
+          width: '100%',
+          maxWidth: 400,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 2
+        }}>
+        <Typography variant="h6" fontWeight="bold">Novo Post</Typography>
 
-      
-      <Box sx={{
-        backgroundColor: "white",
-        padding: 3,
-        borderRadius: 2,
-        maxWidth: 600,
-      }}>
-
-
-        <TextField>
-          id="outlined-basic"
+        <TextField
+          label="Título do Post"
           variant="outlined"
-          label="Titulo do Post"
+          fullWidth
           value={titulo}
           onChange={(e) => setTitulo(e.target.value)}
-        </TextField>
+        />
 
-             <TextField>
-          id="outlined-basic"
+        <TextField
+          label="ID do Autor"
           variant="outlined"
-          label="Id do Usuario"
+          fullWidth
           value={id}
           onChange={(e) => setId(e.target.value)}
-        </TextField>
+        />
 
-        <Button
-        onClick={createPost}
-        >
-          Enviar Post
+        <Button variant="contained"
+          color="secondary"
+          onClick={createPost}
+        >Enviar Post</Button>
+      </Paper>
 
-        </Button>
-
-
-        
-  
-      </Box>
-
-
-      <Box sx={{
-        backgroundColor: "#1e1e1e",
-        padding: 3,
-        borderRadius: 2,
-        maxWidth: 600,
-      }}>
-
-        <Typography
-          variant="h5"
-          color="white"
-        > Posts </Typography>
+      <Box sx={{ width: '100%', maxWidth: 500 }}>
+        <Typography variant="h5"
+          sx={{
+            mb: 2,
+            fontWeight: 'bold'
+          }}
+        >Posts</Typography>
 
         {postData.map((post) => (
-          <Box
-            key={post.id}
+          <Paper key={post.id}
             sx={{
-              bgcolor: "#2a2a2a",
-              padding: 2,
-              mb: 2
-            }}
-          >
-            <Typography color="green">
+              p: 2,
+              mb: 2,
+              bgcolor: '#1e1e1e',
+              color: 'white'
+            }}>
+
+            <Typography variant="subtitle1"
+              color="#4caf50"
+              fontWeight="bold">
               {post.title}
             </Typography>
+            <Box sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              mt: 1
+            }}>
 
-            <Typography
-              color="red"
-              sx={{ mt: 1 }}>
-              {post.Likes.length} Curtidas
-            </Typography>
+              <Typography variant="caption"
+                color="gray"
+              >ID Autor: {post.UserId}
+              </Typography>
 
-          </Box>
+              <Typography variant="caption"
+                color="#f44336"
+              >
+                {post.Likes?.length || 0} Curtidas
+
+              </Typography>
+            </Box>
+          </Paper>
         ))}
-
-
       </Box>
+
     </Box>
   )
 }
-
-
-
 
 export default HomePage;
