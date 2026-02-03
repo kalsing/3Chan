@@ -9,8 +9,8 @@ class LikeControl {
     const postId = req.body.postId;
 
     const addLike = await Like.create({
-        UserId: userId,
-        PostId: postId
+        userId: userId,
+        postId: postId
     });
     return res.json(addLike);
   }
@@ -20,7 +20,7 @@ class LikeControl {
 
     const countLikes = await Like.count({
       where: {
-      PostId: postId
+      postId: postId
       }
 
     });
@@ -33,8 +33,8 @@ class LikeControl {
 
     const unlike = await Like.destroy({
         where: { 
-          UserId: userId,
-          PostId: postId
+          userId: userId,
+          postId: postId
         }
     });
     return res.status(204).send();

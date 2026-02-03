@@ -8,14 +8,14 @@ import Like from "./tables/Like.js";
 import cors from "cors";
 
 
-User.hasMany(Post);
-Post.belongsTo(User);
+User.hasMany(Post, { foreignKey: 'userId'});
+Post.belongsTo(User, { foreignKey: 'userId'});
 
 
-Like.belongsTo(User);
-Like.belongsTo(Post);
-User.hasMany(Like);
-Post.hasMany(Like);
+Like.belongsTo(User, { foreignKey: 'userId' });
+Like.belongsTo(Post, { foreignKey: 'postId' });
+User.hasMany(Like, { foreignKey: 'userId' });
+Post.hasMany(Like, { foreignKey: 'postId' });
 
 const app = express();
 app.use(cors());
@@ -25,7 +25,7 @@ app.use(router);
 
 async function startServer() {
     try {
-        await sequelize.sync();
+        await sequelize.sync( {force: true} );
         console.log("banco inicializado");
 
         app.listen(3000, () => {

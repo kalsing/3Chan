@@ -6,10 +6,7 @@ const Post = sequelize.define("Post", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  UserId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
   }
-});
+);
 
 export default Post;

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import api from "../../apis/api"
 import { Box, Button, TextField, Typography, Paper } from "@mui/material";
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 function HomePage() {
   const [userData, setUserData] = useState([]);
@@ -9,14 +10,28 @@ function HomePage() {
   const [sobrenome, setSobrenome] = useState("")
   const [titulo, setTitulo] = useState("")
   const [id, setId] = useState("")
+  
 
   async function createUser() {
-    await api.post("/users", { firstName: nome, lastName: sobrenome })
+    await api.post("/users", {
+      firstName: nome, 
+      lastName: sobrenome
+     })
   }
 
   async function createPost() {
-    await api.post("/posts", { title: titulo, UserId: id })
+    await api.post("/posts", {
+       title: titulo,
+       userId: id 
+      })
   }
+
+async function createLike(postId) {
+  await api.post("/likes", {
+    userId: Number(id),
+    postId: Number(postId) 
+  });
+}
 
   async function getUserData() {
     const getUserResponse = await api.get("/users");
@@ -138,7 +153,17 @@ function HomePage() {
               <Typography variant="caption"
                 color="#f44336"
               >
-                {post.Likes?.length || 0} Curtidas
+                {post.Likes?.length || 0} 
+                
+                <Button 
+        size="small" 
+        variant="outlined" 
+        color="error"
+        onClick={() => createLike(post.id)}
+        sx={{ fontSize: '0.7rem', py: 0 }}
+      >
+        Like
+      </Button>
 
               </Typography>
             </Box>
@@ -147,7 +172,7 @@ function HomePage() {
       </Box>
 
     </Box>
-  )
+  );
 }
 
 export default HomePage;

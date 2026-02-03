@@ -7,7 +7,7 @@ class PostControl {
   async create(req, res) {
     const post = await Post.create({
       title: req.body.title,
-      UserId: req.body.userId
+      userId: req.body.userId
     });
     return res.json(post);
   }
@@ -15,8 +15,7 @@ class PostControl {
 
   async showAll(req, res) {
     const posts = await Post.findAll({
-      include: User,
-      include: Like
+      include: [User, Like]
     });
     return res.json(posts);
   }
