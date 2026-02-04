@@ -8,14 +8,14 @@ import Like from "./tables/Like.js";
 import cors from "cors";
 
 
-User.hasMany(Post, { foreignKey: 'userId'});
+User.hasMany(Post, { foreignKey: 'userId', onDelete: "CASCADE"});
 Post.belongsTo(User, { foreignKey: 'userId'});
 
 
 Like.belongsTo(User, { foreignKey: 'userId' });
 Like.belongsTo(Post, { foreignKey: 'postId' });
-User.hasMany(Like, { foreignKey: 'userId' });
-Post.hasMany(Like, { foreignKey: 'postId' });
+User.hasMany(Like, { foreignKey: 'userId', onDelete: "CASCADE" });
+Post.hasMany(Like, { foreignKey: 'postId', onDelete: "CASCADE" });
 
 const app = express();
 app.use(cors());
