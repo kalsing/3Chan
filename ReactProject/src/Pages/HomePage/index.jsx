@@ -14,7 +14,7 @@ function HomePage() {
 
   async function createUser() {
     const response = await api.post("/users", {
-      firstName: nome, 
+      firstName: nome,
       lastName: sobrenome
     });
     setId(response.data.id);
@@ -24,18 +24,19 @@ function HomePage() {
     await api.post("/posts", {
       title: titulo,
       content: conteudo,
-      userId: id 
+      userId: id
     });
     setTitulo("");
+    setConteudo("");
     getPostData();
   }
 
   async function createLike(postId) {
     await api.post("/likes", {
       userId: Number(id),
-      postId: Number(postId) 
+      postId: Number(postId)
     });
-    getPostData(); 
+    getPostData();
   }
 
   async function getUserData() {
@@ -55,26 +56,35 @@ function HomePage() {
 
   return (
     <Box sx={{
-      backgroundColor: '#f0f2f5',
-      minHeight: '100vh', p: 4,
-      display: 'flex', flexDirection: 'column',
-      alignItems: 'center',
-      gap: 4
+      backgroundColor: "darkgrey",
+      minHeight: '100vh',
+      p: 2,
+      position: 'relative',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center'
     }}>
 
-      <Paper elevation={2}
+      <Paper elevation={3}
         sx={{
-          p: 3,
-          width: '100%',
-          maxWidth: 400,
+          p: 2,
+          width: 250,
+          position: 'fixed',
+          top: 20,
+          left: 20,
           display: 'flex',
           flexDirection: 'column',
-          gap: 2
+          gap: 1.5,
+          zIndex: 1000
         }}>
-        <Typography variant="h6" fontWeight="bold">Login</Typography>
+        <Typography variant="subtitle1"
+          fontWeight="bold">
+          Login</Typography>
+
         <TextField
           label="Nome"
           variant="outlined"
+          size="small"
           fullWidth
           value={nome}
           onChange={(e) => setNome(e.target.value)}
@@ -82,87 +92,110 @@ function HomePage() {
         <TextField
           label="Sobrenome"
           variant="outlined"
+          size="small"
           fullWidth
           value={sobrenome}
           onChange={(e) => setSobrenome(e.target.value)}
         />
-        <Button variant="contained" onClick={createUser}>Criar Usuario</Button>
+        <Button variant="contained"
+          size="small"
+          onClick={createUser}>
+          Logar</Button>
+
       </Paper>
 
       <Paper elevation={2}
         sx={{
           p: 3,
           width: '100%',
-          maxWidth: 400,
+          maxWidth: 600,
           display: 'flex',
           flexDirection: 'column',
-          gap: 2
+          gap: 2,
+          mt: 4,
+          mb: 6
         }}>
-        <Typography variant="h6" fontWeight="bold">Novo Post</Typography>
+        <Typography variant="h6"
+          fontWeight="bold">
+          Novo Post</Typography>
 
         <TextField
-          label="Título do Post"
+          label="Titulo do Post"
           variant="outlined"
           fullWidth
           value={titulo}
           onChange={(e) => setTitulo(e.target.value)}
         />
 
-
-        <Button variant="contained"
+        <Button
+          variant="contained"
           color="secondary"
           onClick={createPost}
         >Enviar Post</Button>
       </Paper>
 
-      <Box sx={{ width: '100%', maxWidth: 500 }}>
+      <Box sx={{ width: '100%', maxWidth: 800, mb: 4 }}>
         <Typography variant="h5"
           sx={{
-            mb: 2,
-            fontWeight: 'bold'
+            mb: 3,
+            fontWeight: 'bold',
+            textAlign: 'center'
           }}
         >Posts</Typography>
 
         {postData.map((post) => (
           <Paper key={post.id}
             sx={{
-              p: 2,
-              mb: 2,
-              bgcolor: '#1e1e1e',
-              color: 'white'
+              p: 3,
+              mb: 3,
+              bgcolor: 'white',
+              borderRadius: 2
             }}>
-
-            <Typography variant="subtitle1"
-              color="#4caf50"
+            <Typography variant="h6"
+              color="primary"
               fontWeight="bold">
               {post.title}
             </Typography>
+
+
             <Box sx={{
               display: 'flex',
               justifyContent: 'space-between',
-              mt: 1
+              alignItems: 'center',
+              pt: 2,
+              borderTop: '1px solid #eee'
             }}>
-
-              <Typography variant="caption"
-                color="gray"
-              >ID Autor: {post.userId}
+              <Typography
+                variant="caption"
+                color="textSecondary">
+                Autor ID: {post.userId}
               </Typography>
 
-              <Typography variant="caption"
-                color="#f44336"
-                sx={{ display: 'flex', alignItems: 'center', gap: 1 }}
-              >
-                {post.Likes?.length || 0} 
-                
-                <Button 
-                  size="small" 
-                  variant="outlined" 
+              <Box sx={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1.5
+              }}>
+                <Typography
+                  variant="body2"
+                  color="error"
+
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center'
+                  }}>
+
+                  {post.Likes.length}
+                </Typography>
+                <Button
+                  size="small"
+                  variant="contained"
                   color="error"
                   onClick={() => createLike(post.id)}
                 >
-                  Like
+                  Curtir
                 </Button>
-              </Typography>
+              </Box>
             </Box>
           </Paper>
         ))}
