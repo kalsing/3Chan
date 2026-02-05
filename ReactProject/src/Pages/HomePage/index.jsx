@@ -153,6 +153,14 @@ function HomePage() {
           onChange={(e) => setTitulo(e.target.value)}
         />
 
+        <TextField
+        label=""
+        variant="outlined"
+        fullWidth
+        value={conteudo}
+        onChange={(e) => setConteudo(e.target.value)}
+        />
+
         <Button
           variant="contained"
           color="secondary"
