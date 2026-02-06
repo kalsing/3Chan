@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import api from "../../apis/api"
-import { Box, Button, TextField, Typography, Paper } from "@mui/material";
+import { Box, Button, TextField, Typography, Paper, IconButton } from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import chan from "../../assets/3chan 2icon.png"
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -245,12 +245,19 @@ function HomePage() {
                 >
                   Curtir
                 </Button>
-                <Button
-                size="small"
-                startIcon={<DeleteIcon />}
-                onClick={() => deletePost(post.id, post.userId)}>
-
-                </Button>
+                {Number(id) === post.userId && (
+  <IconButton 
+    color="error"
+    size="small"
+    onClick={() => deletePost(post.id, post.userId)}
+    sx={{
+        backgroundColor: '#00000071'
+      }
+    }
+  >
+    <DeleteIcon fontSize="small" />
+  </IconButton>
+)}
               </Box>
             </Box>
           </Paper>
