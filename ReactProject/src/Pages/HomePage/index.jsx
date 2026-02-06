@@ -24,11 +24,13 @@ function HomePage() {
     getUserData();
   }
 
-  async function deletePost(postId){
-    const response = await api.delete(`posts/${postId}`, {
+  async function deletePost(postId, postUserId){
+    if(Number(id) == postUserId){
+   const response = await api.delete(`posts/${postId}`, {
     })
     getPostData();
   }
+    }
 
   async function createPost() {
     await api.post("/posts", {
@@ -246,7 +248,7 @@ function HomePage() {
                 <Button
                 size="small"
                 startIcon={<DeleteIcon />}
-                onClick={() => deletePost(post.id)}>
+                onClick={() => deletePost(post.id, post.userId)}>
 
                 </Button>
               </Box>
