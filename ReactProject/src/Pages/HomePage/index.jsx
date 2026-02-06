@@ -140,7 +140,7 @@ function HomePage() {
           mb: 6
         }}>
         <Typography
-          variant="h6"
+          variant="h4"
           fontWeight="bold"
           color="white">
           Novo Post</Typography>
@@ -154,7 +154,7 @@ function HomePage() {
         />
 
         <TextField
-        label=""
+        label="Conteudo do Post"
         variant="outlined"
         fullWidth
         value={conteudo}
@@ -186,10 +186,16 @@ function HomePage() {
               bgcolor: '#4f4f4f',
               borderRadius: 2
             }}>
-            <Typography variant="h6"
+            <Typography variant="h4"
               color="white"
               fontWeight="bold">
               {post.title}
+            </Typography>
+
+        <Typography variant="h6"
+              color="white"
+              fontWeight="bold">
+              {post.content}
             </Typography>
 
 
