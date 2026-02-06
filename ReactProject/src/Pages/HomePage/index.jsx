@@ -92,20 +92,33 @@ function HomePage() {
           }}
         />
       </Box>
-      
+
       <Box>
-            {id ? (
+        {id ? (
           <Typography
-          variant="h5"
-          color="#00eeff"
-          >Logado como: {nome} {sobrenome}</Typography>
+            color="black"
+            variant="body1"
+            sx={{
+              mt: 1,
+              p: 1,
+              textAlign: 'center',
+              animation: 'blink 0.8s infinite steps(1)',
+              '@keyframes blink': {
+                '0%': { backgroundColor: '#00ff00' },
+                '50%': { backgroundColor: '#fbff00' },
+                '100%': { backgroundColor: '#00ff00' }
+              }
+            }}
+          >
+            Logado como: {nome} {sobrenome}
+          </Typography>
         ) : (
-          <Typography color = "red"
-          variant="h5"
+          <Typography color="red"
+            variant="h4"
           >Faça login</Typography>
         )}
-        </Box>
-        
+      </Box>
+
 
       <Paper elevation={3}
         sx={{
@@ -125,7 +138,7 @@ function HomePage() {
           fontWeight="bold"
           color="black">
           Login</Typography>
-          
+
 
         <TextField
           label="Nome"
