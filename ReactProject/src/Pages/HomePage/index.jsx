@@ -23,6 +23,12 @@ function HomePage() {
     getUserData();
   }
 
+  async function deletePost(postId){
+    const response = await api.delete(`posts/${postId}`, {
+    })
+    getPostData();
+  }
+
   async function createPost() {
     await api.post("/posts", {
       title: titulo,
