@@ -7,13 +7,27 @@ import '@fontsource/roboto/700.css';
 import HomePage from "./Pages/HomePage/index";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import theme from './Pages/HomePage/theme';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import UserCreate from './Pages/UserCreatePage';
 
-createRoot(document.getElementById('root')).render(
+const router = createBrowserRouter([
+{
+path: "/login",
+},
+
+
+
+]);
+
+
+
+
+const root = createRoot(document.getElementById('root')).render(
   <StrictMode>
     <>
       <CssBaseline />
       <ThemeProvider theme={theme}>
-        <HomePage />
+        <UserCreate />
       </ThemeProvider>
     </>
   </StrictMode>

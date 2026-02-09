@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react"
 import api from "../../apis/api"
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography, Paper, IconButton } from "@mui/material";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import chan from "../../assets/3chan 2icon.png"
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function UserCreate() {
     const [userData, setUserData] = useState([]);
@@ -24,40 +27,59 @@ function UserCreate() {
     }, [])
 
     return (
-        <Box
-            sx={{
-                backgroundColor: 'grey',
-                minHeight: '100vh',
-                display: 'flex',
-                flexDirection: 'column', 
-                justifyContent: 'center', 
-                alignItems: 'center',
-                padding: 2,
-                gap: 2
-            }}
-        >
-            <TextField
-                id="outlined-nome"
-                label="Nome"
-                variant="outlined"
-                value={nome}
-                onChange={(e) => setNome(e.target.value)}
-            />
 
-            <TextField
-                id="outlined-sobrenome" 
-                label="Sobrenome"
-                variant="outlined"
-                value={sobrenome}
-                onChange={(e) => setSobrenome(e.target.value)}
-            />
+        <Box sx={{
+            backgroundColor: "black",
+            minHeight: '100vh',
+            p: 2,
+            position: 'relative',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center'
+        }}>
+            <Box sx={{
+                position: 'fixed',
+                top: 0,
+                right: 5,
+                zIndex: 1100
+            }}>
+                <Box
+                    component="img"
+                    src={chan}
+                    sx={{
+                        width: 110,
+                        height: 110,
+                    }}
+                />
+            </Box>
 
-            <Button 
-                variant="contained" 
-                onClick={postUser}
-            >
-                Criar Usuário
-            </Button>
+            <Paper elevation={3}
+                sx={{
+                    backgroundColor: "#4f4f4f",
+                    p: 2,
+                    width: 250,
+                    position: 'fixed',
+                    top: 20,
+                    left: 20,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 1.5,
+                    zIndex: 1000
+                }}>
+                <Typography
+                    variant="subtitle1"
+                    fontWeight="bold"
+                    color="black">
+                    Login</Typography>
+
+                <TextField>
+
+
+                </TextField>
+
+            </Paper>
+
+
         </Box>
     )
 }
