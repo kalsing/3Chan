@@ -83,7 +83,11 @@ function HomePage() {
         />
       </Box>
 
-      <Box>
+      <Box
+      transform sx={{
+        transform: "translateY(5px)",
+      }}  
+      >
         {userId ? (
           <Typography
             color="black"
@@ -100,8 +104,13 @@ function HomePage() {
               }
             }}
           >
+             <Typography>
+              ID: {userId}
+            </Typography>
             Logado como: {nome} {sobrenome}
           </Typography>
+          
+          
         ) : (
           <Typography color="red"
             variant="h4"
