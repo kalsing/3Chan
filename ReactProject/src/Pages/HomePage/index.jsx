@@ -4,28 +4,18 @@ import { Box, Button, TextField, Typography, Paper, IconButton } from "@mui/mate
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import chan from "../../assets/3chan 2icon.png"
 import DeleteIcon from '@mui/icons-material/Delete';
-
+import { useLocation } from "react-router-dom";
 
 function HomePage() {
   const [userData, setUserData] = useState([]);
   const [postData, setPostData] = useState([]);
-  const [nome, setNome] = useState("")
-  const [sobrenome, setSobrenome] = useState("")
   const [titulo, setTitulo] = useState("")
   const [conteudo, setConteudo] = useState("")
-  const [id, setId] = useState("")
-
-  async function createUser() {
-    const response = await api.post("/users", {
-      firstName: nome,
-      lastName: sobrenome
-    });
-    setId(response.data.id);
-    getUserData();
-  }
+  const location = useLocation();
+  const { userId, nome, sobrenome } = location.state;
 
   async function deletePost(postId, postUserId) {
-    if (Number(id) == postUserId) {
+    if (Number(userId) == postUserId) {
       const response = await api.delete(`posts/${postId}`, {
       })
       getPostData();
@@ -36,7 +26,7 @@ function HomePage() {
     await api.post("/posts", {
       title: titulo,
       content: conteudo,
-      userId: id
+      userId: userId
     });
     setTitulo("");
     setConteudo("");
@@ -45,7 +35,7 @@ function HomePage() {
 
   async function createLike(postId) {
     await api.post("/likes", {
-      userId: Number(id),
+      userId: Number(userId),
       postId: Number(postId)
     });
     getPostData();
@@ -94,7 +84,7 @@ function HomePage() {
       </Box>
 
       <Box>
-        {id ? (
+        {userId ? (
           <Typography
             color="black"
             variant="body1"
@@ -138,35 +128,6 @@ function HomePage() {
           fontWeight="bold"
           color="black">
           Login</Typography>
-
-
-        <TextField
-          label="Nome"
-          variant="outlined"
-          size="small"
-          color="white"
-          fullWidth
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
-        />
-
-
-        <TextField
-          label="Sobrenome"
-          variant="outlined"
-          size="small"
-          fullWidth
-          value={sobrenome}
-          onChange={(e) => setSobrenome(e.target.value)}
-        />
-        <Button
-          color="success"
-          variant="contained"
-          size="small"
-          onClick={createUser}>
-          Logar</Button>
-
-
 
       </Paper>
 
@@ -279,7 +240,7 @@ function HomePage() {
                 >
                   Curtir
                 </Button>
-                {Number(id) === post.userId && (
+                {Number(userId) === post.userId && (
                   <IconButton
                     color="error"
                     size="small"

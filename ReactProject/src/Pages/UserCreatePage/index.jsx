@@ -1,4 +1,4 @@
-import {navigate, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import api from "../../apis/api"
 import { Box, Button, TextField, Typography, Paper, IconButton } from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -12,15 +12,17 @@ function UserCreate() {
     const [sobrenome, setSobrenome] = useState("")
     const navigate = useNavigate();
 
-   async function createUser() {
-        await api.post("/users", {
+    async function createUser() {
+      const response = await api.post("/users", {
             firstName: nome,
-            lastName: sobrenome 
+            lastName: sobrenome
         })
         getUserData();
-        setNome("");
-        setSobrenome("");
-        navigate('/homepage');
+        navigate('/homepage', {state: {
+                userId: response.data.id,
+                nome: nome,
+                sobrenome: sobrenome,
+            }});
     }
 
     async function getUserData() {
@@ -101,10 +103,7 @@ function UserCreate() {
                 >
                     Logar
                 </Button>
-
             </Paper>
-
-
         </Box>
     )
 }
