@@ -12,7 +12,8 @@ import UserCreate from './Pages/UserCreatePage';
 
 const router = createBrowserRouter([
 {
-path: "",
+path: "/",
+element: <UserCreate/>
 },
 {
 path: "/login",
