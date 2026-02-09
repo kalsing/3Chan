@@ -1,23 +1,26 @@
-import { useEffect, useState } from "react"
+import {navigate, useEffect, useState } from "react"
 import api from "../../apis/api"
 import { Box, Button, TextField, Typography, Paper, IconButton } from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import chan from "../../assets/3chan 2icon.png"
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useNavigate } from "react-router-dom";
 
 function UserCreate() {
     const [userData, setUserData] = useState([]);
     const [nome, setNome] = useState("")
     const [sobrenome, setSobrenome] = useState("")
+    const navigate = useNavigate();
 
-    async function createUser() {
+   async function createUser() {
         await api.post("/users", {
             firstName: nome,
-            lastName: sobrenome
+            lastName: sobrenome 
         })
         getUserData();
         setNome("");
         setSobrenome("");
+        navigate('/homepage');
     }
 
     async function getUserData() {
