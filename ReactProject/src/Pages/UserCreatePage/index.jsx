@@ -10,12 +10,14 @@ function UserCreate() {
     const [userData, setUserData] = useState([]);
     const [nome, setNome] = useState("")
     const [sobrenome, setSobrenome] = useState("")
+    const [senha, setSenha] = useState("")
     const navigate = useNavigate();
 
     async function createUser() {
       const response = await api.post("/users", {
             firstName: nome,
-            lastName: sobrenome
+            lastName: sobrenome,
+            userPassword: senha
         })
         getUserData();
         navigate('/homepage', {state: {

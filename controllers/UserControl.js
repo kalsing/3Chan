@@ -6,7 +6,8 @@ class UserControl {
   async createUser(req, res) {
     const user = await User.create({
       firstName: req.body.firstName,
-      lastName: req.body.lastName
+      lastName: req.body.lastName,
+      userPassword: req.body.userPassword
     });
     return res.json(user);
   }
