@@ -28,7 +28,10 @@ function UserCreate() {
                 senha: senha
             }
         });
+
     }
+    
+
 
     async function getUserData() {
         const getUserResponse = await api.get("/users");
@@ -79,6 +82,48 @@ function UserCreate() {
                     flexDirection: 'column',
                     gap: 1.5,
                     zIndex: 1000
+                }}>
+                <Typography
+                    variant="subtitle1"
+                    fontWeight="bold"
+                    color="black">
+                    Register</Typography>
+
+                <TextField
+                    label="Nome"
+                    variant="outlined"
+                    fullWidth
+                    value={nome}
+                    onChange={(e) => setNome(e.target.value)}>
+                </TextField>
+
+                <TextField
+                    label="Sobrenome"
+                    variant="outlined"
+                    fullWidth
+                    value={sobrenome}
+                    onChange={(e) => setSobrenome(e.target.value)}>
+                </TextField>
+                
+                <TextField
+                    label="senha"
+                    variant="outlined"
+                    fullWidth
+                    value={senha}
+                    onChange={(e) => setSenha(e.target.value)}>
+                </TextField>
+
+                <Button
+                    variant="contained"
+                    onClick={createUser}
+                >
+                    Registrar
+                </Button>
+            </Paper>
+
+             <Paper elevation={3}
+                sx={{
+            
                 }}>
                 <Typography
                     variant="subtitle1"
