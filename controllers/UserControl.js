@@ -1,5 +1,6 @@
 import User from "../models/User.js";
 import Post from "../models/Post.js";
+import { useRadioGroup } from "@mui/material";
 
 class UserControl {
 
@@ -9,7 +10,29 @@ class UserControl {
       lastName: req.body.lastName,
       userPassword: req.body.userPassword
     });
+    
     return res.json(user);
+}
+
+  async loginUser(req, res) {
+    const user = await User.findOne({
+      where:{
+        firstName: firstName,
+        lastName: lastName
+      }
+    });
+
+    if(!user){
+      return res.status(400).send()
+    }
+
+        if(user.userPassword !== userPassword){
+      return res.status(400).send()
+    }
+    return res.json({
+      firstName: user.firstName,
+      lastName: user.lastName
+    })
   }
 
 
