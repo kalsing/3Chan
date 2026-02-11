@@ -17,8 +17,8 @@ class UserControl {
   async loginUser(req, res) {
     const user = await User.findOne({
       where:{
-        firstName: firstName,
-        lastName: lastName
+        firstName: req.body.firstName,
+        lastName: req.body.lastName
       }
     });
 
