@@ -12,7 +12,11 @@ function HomePage() {
   const [titulo, setTitulo] = useState("")
   const [conteudo, setConteudo] = useState("")
   const location = useLocation();
-  const { userId, nome, sobrenome, senha } = location.state;
+
+  const savedUser = JSON.parse(localStorage.getItem("3chanUser"));
+  const currentUser = location.state || savedUser;
+  const { userId, nome, sobrenome } = currentUser || {};
+
 
   async function deletePost(postId, postUserId) {
     if (Number(userId) == postUserId) {

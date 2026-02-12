@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 function UserCreate() {
     const [userData, setUserData] = useState([]);
+    //#1
     const [nome, setNome] = useState("")
     const [sobrenome, setSobrenome] = useState("")
     const [senha, setSenha] = useState("")
@@ -15,35 +16,47 @@ function UserCreate() {
 
     async function createUser() {
         const response = await api.post("/users", {
+            //#2
             firstName: nome,
             lastName: sobrenome,
             userPassword: senha
         })
-        getUserData();
-        navigate('/homepage', {
-            state: {
-                userId: response.data.id,
-                nome: nome,
-                sobrenome: sobrenome,
-                senha: senha
-            }
-        });
 
+        const userData = {
+            userId: response.data.id,
+            nome: response.data.firstName,
+            lastName: response.data.lastName
+        }
+        localStorage.setItem("3chanUser", JSON.stringify(userData));
+        navigate('/homepage', { state: userData });
     }
+
+
+    async function logUser(){
+        const response = await api.post("/login", {
+            firstName: nome,
+            lastName: sobrenome,
+            userPassword: senha
+        })
+
+        const userData = {
+            userId: response.data.id,
+            nome: response.data.firstName,
+            lastName: response.data.lastName
+
+        }
+    localStorage.setItem("3chanUser", JSON.stringify(userData));
+    navigate('/homepage', { state: userData });
+        }
+    
     
 
 
-    async function getUserData() {
-        const getUserResponse = await api.get("/users");
-        setUserData(getUserResponse.data);
-    }
 
     useEffect(() => {
-        getUserData();
     }, [])
 
     return (
-
         <Box sx={{
             backgroundColor: "black",
             minHeight: '100vh',
@@ -93,6 +106,7 @@ function UserCreate() {
                     label="Nome"
                     variant="outlined"
                     fullWidth
+                    //#3
                     value={nome}
                     onChange={(e) => setNome(e.target.value)}>
                 </TextField>
@@ -157,7 +171,7 @@ function UserCreate() {
 
                 <Button
                     variant="contained"
-                    onClick={createUser}
+                    onClick={logUser}
                 >
                     Logar
                 </Button>

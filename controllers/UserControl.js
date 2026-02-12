@@ -5,6 +5,7 @@ import { useRadioGroup } from "@mui/material";
 class UserControl {
 
   async createUser(req, res) {
+    //#1
     const user = await User.create({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
