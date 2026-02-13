@@ -23,7 +23,7 @@ function UserCreate() {
 
         const userData = {
             userId: response.data.id,
-            nome: response.data.firstName,
+            firstName: response.data.firstName,
             lastName: response.data.lastName
         }
         localStorage.setItem("3chanUser", JSON.stringify(userData));
@@ -42,7 +42,7 @@ function UserCreate() {
             userId: response.data.id,
             firstName: response.data.firstName,
             lastName: response.data.lastName,
-            userPassword: response.data.userPassword
+
 
         }
     localStorage.setItem("3chanUser", JSON.stringify(userData));

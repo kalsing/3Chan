@@ -15,7 +15,7 @@ function HomePage() {
 
   const savedUser = JSON.parse(localStorage.getItem("3chanUser"));
   const currentUser = location.state || savedUser;
-  const { userId, nome, sobrenome } = currentUser || {};
+  const { userId, firstName, lastName } = currentUser || {};
 
 
   async function deletePost(postId, postUserId) {
@@ -111,7 +111,7 @@ function HomePage() {
              <Typography>
               ID: {userId}
             </Typography>
-            Logado como: {nome} {sobrenome}
+            Logado como: {firstName} {lastName}
           </Typography>
           
           
@@ -206,7 +206,7 @@ function HomePage() {
               </Typography>
 
               <Typography variant="subtitle1" color="textSecondary" display="block">
-                Nome do Autor: {nome} {sobrenome}
+                Nome do Autor: {firstName} {lastName}
               </Typography>
 
 
