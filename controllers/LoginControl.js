@@ -1,5 +1,6 @@
 import User from "../models/User.js";
 import Post from "../models/Post.js";
+import bcrypt, { compare } from "bcrypt";
 
 class LoginControl {
 
@@ -9,7 +10,6 @@ class LoginControl {
       where: {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        userPassword: req.body.userPassword
       }
     });
 
@@ -17,7 +17,9 @@ class LoginControl {
       return res.status(400).send()
     }
 
-    if (user.userPassword !== req.body.userPassword) {
+    const hashCompare = await bcrypt.compare(req.body.userPassword, user.userPassword)
+
+    if (!hashCompare) {
       return res.status(400).send()
     }
     return res.json({

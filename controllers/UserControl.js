@@ -1,16 +1,20 @@
 import User from "../models/User.js";
 import Post from "../models/Post.js";
+import bcrypt from "bcrypt"
 
 class UserControl {
 
   async createUser(req, res) {
+    const { userPassword } = req.body
+
+    const hash = await bcrypt.hash(userPassword, 10)
     //#1
     const user = await User.create({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
-      userPassword: req.body.userPassword
+      userPassword: hash
     });
-    
+    console.log(hash, userPassword)
     return res.json(user);
 }
 
