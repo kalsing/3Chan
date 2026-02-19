@@ -3,6 +3,7 @@ import Post from "../models/Post.js";
 import bcrypt from "bcrypt"
 import jwt from 'jsonwebtoken';
 
+
 class UserControl {
 
   async createUser(req, res) {
@@ -17,10 +18,11 @@ class UserControl {
       userPassword: hash,
     });
 
+    const secretkey = process.env.CHAVE;
 
     const token = jwt.sign(
       { id: user._id },
-      "4vesta",
+      secretkey,
       { expiresIn: "15m" }
     )
 
