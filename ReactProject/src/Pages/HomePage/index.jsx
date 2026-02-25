@@ -1,16 +1,24 @@
 import { useEffect, useState } from "react"
 import api from "../../apis/api"
 import { Box, Button, TextField, Typography, Paper, IconButton } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import chan from "../../assets/3chan 2icon.png"
 import DeleteIcon from '@mui/icons-material/Delete';
+import { Navigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function HomePage() {
   const [userData, setUserData] = useState([]);
   const [postData, setPostData] = useState([]);
   const [titulo, setTitulo] = useState("")
   const [conteudo, setConteudo] = useState("")
+  const [tema, setTema] = useState(false)
+  const navigate = useNavigate()
   const location = useLocation();
+
+  const theme = createTheme({ palette: { mode: tema ?
+     "dark" : "light" } })
 
   const savedUser = JSON.parse(localStorage.getItem("3chanUser"));
   const currentUser = location.state || savedUser;
@@ -20,7 +28,6 @@ function HomePage() {
     localStorage.clear();
     navigate("/login")
   }
-
 
   async function deletePost(postId, postUserId) {
     if (Number(userId) == postUserId) {
@@ -65,8 +72,9 @@ function HomePage() {
   }, [])
 
   return (
-    <Box sx={{
-      backgroundColor: "black",
+    <ThemeProvider theme={theme}>
+   <Box sx={{
+  backgroundColor: tema ? "white" : "black",
       minHeight: '100vh',
       p: 2,
       position: 'relative',
@@ -127,14 +135,12 @@ function HomePage() {
       </Box>
 
       <Box>
-
-        <Button
-        onClick={handleLogout}
-        >
+        <Button onClick={handleLogout}>
           Deslogar
         </Button>
-        
-
+        <Button onClick={() => setTema(!tema)}>
+          {tema ? "Modo Claro" : "Modo Escuro"}
+        </Button>
       </Box>
 
 
@@ -268,6 +274,7 @@ function HomePage() {
         ))}
       </Box>
     </Box>
+    </ThemeProvider>
   );
 }
 
