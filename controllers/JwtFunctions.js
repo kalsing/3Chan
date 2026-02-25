@@ -1,12 +1,13 @@
+import { configDotenv } from "dotenv";
 import jwt from "jsonwebtoken";
-import React from "react"
+
 
  const secretKey = process.env.CHAVE;
 
 export function generateToken(id) {
   const token = jwt.sign(
     { id: id },
-        "gabriel123",
+  "gabriel123",
     { expiresIn: "15m" }
   );
   return token;
