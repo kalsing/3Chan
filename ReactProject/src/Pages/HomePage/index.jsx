@@ -4,7 +4,6 @@ import { Box, Button, TextField, Typography, Paper, IconButton } from "@mui/mate
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import chan from "../../assets/3chan 2icon.png"
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useLocation } from "react-router-dom";
 
 function HomePage() {
   const [userData, setUserData] = useState([]);
@@ -15,7 +14,12 @@ function HomePage() {
 
   const savedUser = JSON.parse(localStorage.getItem("3chanUser"));
   const currentUser = location.state || savedUser;
-  const { userId, firstName, lastName } = currentUser || {};
+  const { userId, firstName, lastName, token } = currentUser;
+
+  async function handleLogout(){
+    localStorage.clear();
+    navigate("/login")
+  }
 
 
   async function deletePost(postId, postUserId) {
@@ -120,6 +124,17 @@ function HomePage() {
             variant="h4"
           >Faça login</Typography>
         )}
+      </Box>
+
+      <Box>
+
+        <Button
+        onClick={handleLogout}
+        >
+          Deslogar
+        </Button>
+        
+
       </Box>
 
 
